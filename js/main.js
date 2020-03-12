@@ -21,9 +21,20 @@ var Coordinate = {
   OFFSET_Y: 70,
 }
 
+var Nodes = {
+  MAP_PINS: document.querySelector('.map__pins'),
+  PIN: document.querySelector('#pin')
+    .content
+    .querySelector('.map__pin'),
+  CARD: document.querySelector('#card')
+    .content
+    .querySelector('.popup'),
+  MAP_FILTERS_CONTAINER: document.querySelector('map__filters-container'),
+}
+
 //Константы
 var MAP = document.querySelector('.map__pins');
-MAP.classList.remove('map--faded');
+
 var MAP_PIN_TEMPLATE = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
@@ -42,9 +53,17 @@ var SAME_HOTELS = mockAds();
 
 
 //Функции
+
 function getRandomNumb(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
+
+function getRandomArray(arr) {
+  var RandomArray = arr.filter(function (item, index) {
+    return index === (getRandomNumb(0, 1));
+  });
+  return RandomArray;
+}
 
 function getRandomItem(array) {
   return array[getRandomNumb(0, array.length)];
@@ -143,6 +162,7 @@ function createPopup(ad) {
 };
 
 
-// Запуск функций
+// Вызовы
+MAP.classList.remove('map--faded');
 createPins();
 createPopup(SAME_HOTELS[0]);
